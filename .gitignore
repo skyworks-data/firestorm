@@ -1,5 +1,3 @@
-train.csv
-test.csv
-test_supplement.csv
-train_sample.csv
+*.csv*
 *.m~
+*.mat
