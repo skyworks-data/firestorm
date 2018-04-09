@@ -21,7 +21,5 @@ classdef Feature
        AttributedTime('attributed_time', '%{yyyy-MM-dd HH:mm:ss}D')
        IsAttributed('is_attributed', '%u8')
     end
-
-   
 end
 
