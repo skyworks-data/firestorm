@@ -1,7 +1,7 @@
+% load('RandQuarterTrainCompressed.mat');
 
+% data = randTrainCompressed(:, [2, 3, 4, 5]);
+% labels = randTrainCompressed.is_attributed;
+% clear randTrainCompressed;
 
-
-tic
-rr = randsample(size(data,1), floor(size(train,1)/4));
-randTrain = data(rr,:);
-toc
+[P, S] = evaluate(RFClassifier, data, labels);
