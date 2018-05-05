@@ -1,5 +1,3 @@
-% downloads = train(train.is_attributed == 1,:);
-% fraud = train(train.is_attributed == 0,:);
 
 downloads = train(train.is_attributed == 1,:);
 fraud = train(train.is_attributed == 0,:);
@@ -56,8 +54,6 @@ legend('Download','Fraud');
 
 
 %% Device
-% deviceFraudCleaned = fraud.device(fraud.device ~= 1 & fraud.device ~= 2 & fraud.device ~= 0);
-% deviceDownloadCleaned = downloads.device(downloads.device ~= 1 & downloads.device ~= 2 & downloads.device ~= 0);
 deviceFraudProb = histcounts(double(fraud.device),...
     'Normalization','probability',...
     'BinMethod','integers')';
