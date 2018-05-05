@@ -1,4 +1,5 @@
-function [P, S] = evaluate(classifier, data, labels, p, shuffleData)
+function [P, S, L, T] = evaluate(classifier, data, labels, p, shuffleData)
+    % p: Percentage of data to hold out for testing
     
     if ~istable(labels)
         labels = table(labels);
@@ -23,13 +24,17 @@ function [P, S] = evaluate(classifier, data, labels, p, shuffleData)
     
     % Train
     disp('Training Model...')
-    model = classifier.fitmodel(train(:,1:end-1), table2array(train(:,end)));
+    classifier.fitmodel(train(:,1:end-1), table2array(train(:,end)));
     
     % Predict
     disp('Making Prediction...')
-    P = model.predict(test(:,1:end-1));
+    P = classifier.predict(test(:,1:end-1));
     
     % Evaluate
+    disp('Evaluating AUC...')
     S = fastAUC(table2array(test(:,end)), P);
+    
+    % Return labels
+    L = table2array(test(:,end));
 end
 
