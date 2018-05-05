@@ -3,6 +3,7 @@ classdef Classifier < handle
     
     methods (Abstract)
         [model] = fitmodel(this, data, labels);
+        [P] = predict(this, data);
     end
 end
 
