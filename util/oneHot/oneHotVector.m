@@ -1,4 +1,4 @@
-% ORIGINAL FUNCTION PULLED FROM 
+% ORIGINAL FUNCTION PULLED FROM www.mathworks.com/matlabcentral/fileexchange/35364-fast-multilayer-feedforward-neural-network-training, then  modified
 
 function oneHotLabels = oneHotVector(labels)
 
