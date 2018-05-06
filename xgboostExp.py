@@ -4,20 +4,9 @@ from sklearn.preprocessing import OneHotEncoder
 import math
 from sklearn.metrics import roc_auc_score
 import pandas as pd
-import scipy.io
 
-import h5py
-import hdf5storage
-mat = hdf5storage.loadmat('matData/RandQuarterTrainCompressed.mat')
-
-data = mat['#subsystem#'][0][0][0][2][0][7]
-
-#data = np.genfromtxt('data.csv', delimiter=',')
-#
-#data = pd.read_csv('rawData/train.csv', 
-#                     usecols=['channel','is_attributed'],
-#                     dtype={'channel':np.uint32,'is_attributed':bool},
-#                     nrows=10)
+########### Experimental Area to Tune Parameters #######
+data = np.genfromtxt('data.csv', delimiter=',')
 
 enc = OneHotEncoder(dtype=np.bool)
 enc.fit(data[:,1].reshape(-1,1)) 
@@ -35,7 +24,6 @@ testLab = data[math.ceil(N*(1-perc)):,0]
 dtrain = xgb.DMatrix(train,label=trainLab);
 dtest = xgb.DMatrix(test, label=testLab);
 
-
 num_round = 50
 evallist = [(dtest, 'eval'), (dtrain, 'train')]
 
@@ -49,7 +37,7 @@ bst = xgb.train(param, dtrain, num_round, evallist)
 pred = bst.predict(dtest)
 print(roc_auc_score(testLab, pred))
 
-########## THE REAL THING #######
+########## Performing final prediction ############
 dataAll = np.genfromtxt('dataAll.csv', delimiter=',')
 
 enc = OneHotEncoder(dtype=np.bool)
