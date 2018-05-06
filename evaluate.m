@@ -1,3 +1,7 @@
+% FILE PURPOSE: - Create a simple way to test models by splitting the data
+%                 into test and train, fitting a model, making a prediction
+%                 and calculating the AUC
+
 function [P, S, L, T] = evaluate(classifier, data, labels, p, shuffleData)
     % p: Percentage of data to hold out for testing
     

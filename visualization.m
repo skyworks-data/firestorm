@@ -1,3 +1,7 @@
+% FILE PURPOSE: - Visualize and understand the distribution of data in both]
+%                 positive and negative classes
+
+train = load('RandQuarterTrainCompressed.mat');
 
 %% Split the dat into the two classes
 downloads = train(train.is_attributed == 1,:);
