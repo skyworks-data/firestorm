@@ -1,3 +1,7 @@
+# FILE PURPOSE: - Implement XGboost on the competition data
+#               - Explore appropriate parameters
+#               - Make prediciton for the competition   
+
 import xgboost as xgb
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder

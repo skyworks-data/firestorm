@@ -1,4 +1,10 @@
+% FILE PURPOSE: - Experiment with transforming data to one hot encoding
+%               - Use Fisher's Linear Discriminant on the encoded data to
+%                 see what class separation could be created
 
+train = load('RandQuarterTrainCompressed.mat');
+
+% Transform only `channel`
 oneHot = oneHotEncoding(train(:,5));
 
 oneHotBad = oneHot(train.is_attributed == 0,:);
