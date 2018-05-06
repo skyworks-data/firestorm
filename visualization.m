@@ -1,7 +1,7 @@
 
+%% Split the dat into the two classes
 downloads = train(train.is_attributed == 1,:);
 fraud = train(train.is_attributed == 0,:);
-
 
 %% IP
 ipFraudProb = histcounts(double(fraud.ip),...
@@ -13,10 +13,12 @@ ipDownloadProb = histcounts(double(downloads.ip),...
     'BinMethod','integers')';
 
 %%%%%%%% GOOD REASON NOT TO USE IP!!! %%%%%%%%%
+uniqueIpD = unique(downloads.ip);
+uniqueIpF = unique(fraud.ip);
 hold off;
-plot(smooth(ipDownloadProb,100,'lowess'));
+plot(uniqueIpD,smooth(ipDownloadProb,100,'lowess'),'LineWidth',1.5);
 hold on;
-plot(smooth(ipFraudProb,100,'lowess'))
+plot(uniqueIpF,smooth(ipFraudProb,100,'lowess'),'LineWidth',1.5)
 legend('Download','Fraud');
 
 
@@ -30,9 +32,9 @@ appDownloadProb = histcounts(double(downloads.app),...
     'Normalization','probability')';
 
 hold off;
-plot(0:length(appDownloadProb)-1,appDownloadProb);
+plot(0:length(appDownloadProb)-1,appDownloadProb,'LineWidth',1.5);
 hold on;
-plot(0:length(appFraudProb)-1,appFraudProb);
+plot(0:length(appFraudProb)-1,appFraudProb,'LineWidth',1.5);
 legend('Download','Fraud');
 
 
@@ -47,9 +49,9 @@ osDownloadProb = histcounts(double(downloads.os),...
     'BinMethod','integers')';
 
 hold off;
-plot(0:length(osDownloadProb)-1,osDownloadProb);
+plot(0:length(osDownloadProb)-1,osDownloadProb,'LineWidth',1.5);
 hold on;
-plot(0:length(osFraudProb)-1,osFraudProb);
+plot(0:length(osFraudProb)-1,osFraudProb,'LineWidth',1.5);
 legend('Download','Fraud');
 
 
@@ -63,9 +65,9 @@ deviceDownloadProb = histcounts(double(downloads.device),...
     'BinMethod','integers')';
 
 hold off;
-plot(0:length(deviceDownloadProb)-1,deviceDownloadProb);
+plot(0:length(deviceDownloadProb)-1,deviceDownloadProb,'LineWidth',1.5);
 hold on;
-plot(0:length(deviceFraudProb)-1,deviceFraudProb);
+plot(0:length(deviceFraudProb)-1,deviceFraudProb,'LineWidth',1.5);
 legend('Download','Fraud');
 
 bar(categorical({'Download', 'Fraud'}), ...
@@ -86,9 +88,9 @@ channelDownloadProb = histcounts(double(downloads.channel),...
     'BinMethod','integers')';
 
 hold off;
-plot(0:length(channelDownloadProb)-1,channelDownloadProb);
+plot(0:length(channelDownloadProb)-1,channelDownloadProb,'LineWidth',1.5);
 hold on;
-plot(0:length(channelFraudProb)-1,channelFraudProb);
+plot(0:length(channelFraudProb)-1,channelFraudProb,'LineWidth',1.5);
 legend('Download','Fraud');
 
 
@@ -98,14 +100,12 @@ legend('Download','Fraud');
 clickTimeFraudProb = histcounts(double(fraud.click_time),'Normalization','probability','BinMethod','integers');
 clickTimeDownloadProb = histcounts(double(downloads.click_time),'Normalization','probability','BinMethod','integers');
 hold off;
-plot(smooth(clickTimeFraudProb,1000,'lowess'));
+plot(smooth(clickTimeFraudProb,1000,'lowess'),'LineWidth',1.5);
 hold on;
-plot(smooth(clickTimeDownloadProb,1000,'lowess'));
+plot(smooth(clickTimeDownloadProb,1000,'lowess'),'LineWidth',1.5);
 legend('Fraud', 'Download');
 
 pred = train.click_time < 47000 & train.click_time > 3630;
 fastAUC(train.is_attributed(train.click_time < 47000 & train.click_time > 3630),pred(train.click_time < 47000 & train.click_time > 3630))
-
-%% Attributed time
 
 
